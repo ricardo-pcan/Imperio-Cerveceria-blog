@@ -1,0 +1,18 @@
+jekyll:
+    container_name: imperio-jekyll
+    hostname: imperioJekyll
+    build: ./provision
+    dockerfile: jekyllDF
+    volumes:
+        - ./src:/data/
+webserver:
+    container_name: imperio-webserver
+    hostname: imperioServer
+    build: ./provision/
+    dockerfile: apacheDF
+    volumes_from:
+        - jekyll
+    ports:
+        - "8000:80"
+
+

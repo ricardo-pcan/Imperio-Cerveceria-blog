@@ -1,0 +1,15 @@
+FROM ubuntu:14.04
+FROM ruby:2.2
+
+MAINTAINER Ricardo Alberto Pérez Candelas <ricardo.pcan@gmail.com>
+
+RUN apt-get -yqq update
+RUN apt-get -yqq install make
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    nodejs
+RUN gem install jekyll
+
+VOLUME [ "/data/", "/var/www/html" ]
+WORKDIR /data
+ENTRYPOINT [ "jekyll", "build", "--destination=/var/www/html" ]
